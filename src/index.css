@@ -183,14 +183,14 @@ a {
   color: white;
 }
 .login{
-  width: 100%;
+  width: 50%;
   max-width: 500px;
-  display: flex;
-    padding-top: 12px;
-    margin: auto;
+  display:inline-flex;
     flex-wrap: wrap;
+    margin: auto;
+    margin-top: 0%;
 
- 
+
 }
 .login a{
   margin: auto;
@@ -432,4 +432,13 @@ border: 1px solid #dad7d7;
 }
 .ea:hover{
   color: white;
+}
+.start{
+  display: flex;
+  flex-direction: row;
+ 
+}
+.end{
+  display:flex;
+  width: 50%;
 }

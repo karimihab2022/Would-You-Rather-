@@ -95,19 +95,19 @@ const Login=(props)=>{
     return(
         <div>
             <h1 className="center">Welcome to WOULD YOU RATHER?</h1>
-
+             <div className="start">
             <div className="login">
 
                     <h1 className ="center"> Use old user</h1>
 
                     <select  value= {selected} onChange={handelChange}>
-                         <option value="select user" >select user</option>
+                        <option value="select user" >select user</option>
                         {
-                             usersids.map((user)=>(
+                            usersids.map((user)=>(
                                 <option key={user} value={user}>{user}</option>
                                 ))
-                         }
-                    
+                        }
+
                     </select>
 
                     <textarea
@@ -118,14 +118,14 @@ const Login=(props)=>{
                     />
 
                     <Link onClick={handellogin} to='/Home'>login</Link>
-                          
-                    
-            </div>
-          
+                        
+
+                    </div>
 
 
-            <div>
-             
+
+                    <div className="end">
+
                     <form onSubmit={handleSignup} className='new-tweet'>
 
                         <h1 className ="center">Create new user</h1>
@@ -173,8 +173,8 @@ const Login=(props)=>{
 
                             <span>*</span>
                         </div>
-          
-         
+
+
                         <button
                             className='qb'
                             type='submit'
@@ -182,8 +182,10 @@ const Login=(props)=>{
                             sign up
                         </button>
                     </form>
-                    
-               
+
+
+                    </div>
+
             </div>
             
         </div>

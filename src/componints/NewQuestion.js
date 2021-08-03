@@ -52,20 +52,33 @@ const NewQuestion =(props)=>{
               <h3> Would You Rather?</h3>
 
                <form className='new-tweet' onSubmit={handleSubmit}>
-                  <textarea
-                    placeholder="optionOne"
-                    value={optionone}
-                    onChange={handleChangeone}
-                    className='textarea'
-                
-                  />
-                    <textarea
-                    placeholder="optionTwo"
-                    value={optiontwo}
-                    onChange={handleChangetwo}
-                    className='textarea'
-                
-                  />
+                  
+                    <div className="a">
+
+                      <textarea
+                          placeholder="option one"
+                          value={optionone}
+                          onChange={handleChangeone}
+                          className='textarea t'  
+                      />
+
+                      <span>*</span>
+
+                      </div>
+
+                      <div className="a">
+
+                          <textarea
+                              placeholder="option two"
+                              value={optiontwo}
+                              onChange={handleChangetwo}
+                              className='textarea t'  
+                          />
+
+                          <span>*</span>
+
+                          </div>
+
         
                   <button
                       className='qb'
