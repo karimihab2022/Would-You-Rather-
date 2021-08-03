@@ -10,7 +10,7 @@ export const users=(state={},action)=>{
             ...action.users
           }
           case Add_question:
-            console.log(state)
+           
             return {
               
               ...state,

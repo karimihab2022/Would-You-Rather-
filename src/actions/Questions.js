@@ -26,7 +26,6 @@ export const HandelAddquestion=(optionOneText,optionTwoText)=>{
         
 
         const { curUser } = getState();
-        console.log( curUser)
         dispatch(showLoading())
         return  _saveQuestion({optionOneText,optionTwoText, author:curUser})
         .then((question)=>
