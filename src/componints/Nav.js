@@ -1,34 +1,28 @@
 import React from "react";
 import { NavLink } from 'react-router-dom'
-import { connect } from "react-redux";
 
-const  Nav =(props)=> {
+const  Nav =()=> {
     return (
       <nav className='nav'>
         <ul>
           <li>
-            <NavLink to='/Home' exact activeClassName='active'>
+            <NavLink to='/Home'  activeclassname='active'>
               Home
             </NavLink>
           </li>
           <li>
-            <NavLink to='/new' activeClassName='active'>
+            <NavLink to='/add' activeclassname='active'>
               New question
             </NavLink>
             </li>
             <li>
-            <NavLink to='/leaderbourd' activeClassName='active'>
-            leaderbourd
+            <NavLink to='/leaderboard' activeclassname='active'>
+            leaderboard
             </NavLink>
             </li>
            
-            
-            
-
-            
-         
         </ul>
       </nav>
     )
   }
-  export default connect()(Nav)
+  export default Nav

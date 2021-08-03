@@ -2,6 +2,7 @@ let users = {
     sarahedo: {
       id: 'sarahedo',
       name: 'Sarah Edo',
+      password:'123456',
       avatarURL: "https://tylermcginnis.com/would-you-rather/sarah.jpg",
       answers: {
         "8xf0y6ziyjabvozdd253nd": 'optionOne',
@@ -14,6 +15,7 @@ let users = {
     tylermcginnis: {
       id: 'tylermcginnis',
       name: 'Tyler McGinnis',
+      password:'123456',
       avatarURL: "https://tylermcginnis.com/would-you-rather/tyler.jpg" ,
       answers: {
         "vthrdm985a262al8qx3do": 'optionOne',
@@ -24,6 +26,7 @@ let users = {
     johndoe: {
       id: 'johndoe',
       name: 'John Doe',
+      password:'123456',
       avatarURL: "https://tylermcginnis.com/would-you-rather/dan.jpg" ,
       answers: {
         "xj352vofupe1dqz9emx13r": 'optionOne',
@@ -146,42 +149,18 @@ let users = {
       }
     }
   }
-  function formatUser ({ id, name, avatarURL }) {
+  function formatUser ({ id, name, avatarURL,password }) {
     return {
       id,
       name,
       avatarURL,
+      password,
         answers: {},
         questions:[],
      
     }
   }
-  export function _saveUser (user) {
-    return new Promise((res, rej) => {
-      const userid = user.id;
-      const formattedUser = formatUser(user);
-  
-      setTimeout(() => {
-        users = {
-          ...users,
-          [userid]: formattedUser
-        }
-        
-        
-  
-        res(formattedUser)
-      }, 1000)
-    })
-  }
-  export function getInitialData () {
-    return Promise.all([
-      _getUsers(),
-      _getQuestions(),
-    ]).then(([users, questions]) => ({
-      users,
-      questions,
-    }))
-  }
+ 
   
   export function _saveQuestion (question) {
     return new Promise((res, rej) => {
@@ -229,6 +208,83 @@ let users = {
               ...questions[qid][answer],
               votes: questions[qid][answer].votes.concat([authedUser])
             }
+          }
+        }
+  
+        res()
+      }, 500)
+    })
+  }
+
+  export function _saveUser (user) {
+    return new Promise((res, rej) => {
+      const userid = user.id;
+      const formattedUser = formatUser(user);
+  
+      setTimeout(() => {
+        users = {
+          ...users,
+          [userid]: formattedUser
+        }
+        
+        
+  
+        res(formattedUser)
+      }, 1000)
+    })
+  }
+  export function getInitialData () {
+    return Promise.all([
+      _getUsers(),
+      _getQuestions(),
+    ]).then(([users, questions]) => ({
+      users,
+      questions,
+    }))
+  }
+
+  export function _savechangename ({ authedUser, name }) {
+    return new Promise((res, rej) => {
+      setTimeout(() => {
+        users = {
+          ...users,
+          [authedUser]: {
+            ...users[authedUser],
+            name: name
+          }
+        }
+  
+        res()
+      }, 500)
+    })
+  }
+
+  export function _savechangeavatar({ authedUser, avatar }) {
+
+    return new Promise((res, rej) => {
+      setTimeout(() => {
+        users = {
+          ...users,
+          [authedUser]: {
+            ...users[authedUser],
+            avatarURL: avatar
+          }
+        }
+  
+        res()
+      }, 500)
+    })
+  }
+
+  export function _savechangepassword({ authedUser, password }) {
+
+    return new Promise((res, rej) => {
+      setTimeout(() => {
+        users = {
+          ...users,
+          [authedUser]: {
+            ...users[authedUser],
+            password: password
           }
         }
   

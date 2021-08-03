@@ -12,7 +12,6 @@ import {Resevequestions} from "./Questions"
          .then(({users,questions})=>{
          dispatch(Reseveusers(users))
          dispatch(Resevequestions (questions))
-         
          dispatch(hideLoading())
          })
         

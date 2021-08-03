@@ -4,15 +4,18 @@ import User from "./User"
 
 
 const Leaderbourd =(props)=>{
+    const {sortedUsers}=props;
+
     return(
-        <div>
-                {console.log (props.sortedUsers)}
+        <div className="center edit">
+
+            <h1>Leaderboard</h1>
+
             <ul>
-            {props.sortedUsers.map((user)=>(
-                      <li key={user.id}>
-                      {console.log(user)}
-                      <User id={user.id}/>
-                  </li>
+            {sortedUsers.map((user)=>(
+                    <li key={user.id}>
+                         <User id={user.id}/>
+                     </li>
             )
               
             )}
@@ -26,11 +29,12 @@ const Leaderbourd =(props)=>{
 
 function mapStateToProps({users}) {
     const sortedUsers = (Object.values(users)).sort((a, b) => {
-        
         return ((Object.keys(b.answers)).length + b.questions.length)-((Object.keys(a.answers)).length + a.questions.length)
       })
+      
     return {
         sortedUsers
     }
 }
+
 export default connect(mapStateToProps)(Leaderbourd);

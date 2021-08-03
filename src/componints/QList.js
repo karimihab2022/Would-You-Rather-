@@ -1,43 +1,69 @@
-import React, {useState,useEffect} from"react";
+import React, {useState} from"react";
 import { connect } from 'react-redux';
 import Question from "./Question";
 import { Link } from "react-router-dom";
 
 const Qlist =(props)=>{
     const[answered,setAnswered]=useState(false);
+    const{questionsids,users,curUser}=props;
    
 
-   
-if(answered===false){
+
     return(
        
-        <div className='center'>
-             {console.log(props)}
-        <button onClick={()=>setAnswered(false)}>
-            not answered { props.questionsids.filter(id=>!Object.keys(props.users[props.curUser].answers).includes(id)).length}
-        </button>
-        <button  onClick={()=>setAnswered(true)}>
-            answerd {Object.keys(props.users[props.curUser].answers).length}
-        </button>
-        <div>
-               
+        <div className='center  qlist'>
+
+            <div>
+                <button  onClick={()=>setAnswered(false)} className={answered?"qb ":"qb s"} >
+                    not answered { questionsids.filter(id=>!Object.keys(users[curUser].answers).includes(id)).length}
+                </button>
+
+                <button  onClick={()=>setAnswered(true)}  className={answered?"s qb":"qb "}>
+                    answerd {Object.keys(users[curUser].answers).length}
+                </button>
+
+            </div>
+           
                 
-               
-            <h3 ></h3>
-            <ul className='dashboard-list'>
-                {
-                    props.questionsids.filter(id=>!Object.keys(props.users[props.curUser].answers).includes(id)).length===0?
-                        <p>you answered all the questions you can <Link to='/New'>create</Link> new question </p>
+            {answered===false?
+                 <div>
                     
-                   :props.questionsids.filter(id=>!Object.keys(props.users[props.curUser].answers).includes(id)).map((Qid)=>(
-                        <li key={Qid}>
-                            <Question id={Qid}/>
-                        </li>
-                    ))
-                }
-            </ul>
+                    <ul className='dashboard-list'>
+                     {
+                         questionsids.filter(id=>!Object.keys(users[curUser].answers).includes(id)).length===0?
+                            <p>you answered all the questions you can <Link className="ea" to='/add'>create</Link> new question </p>
+                    
+                            :questionsids.filter(id=>!Object.keys(users[curUser].answers).includes(id)).map((Qid)=>(
+                                <li key={Qid}>
+                                 <Question id={Qid}/>
+                                 </li>
+                             ))
+                      }
+                    </ul>
 
-            </div>      
+               </div>
+
+                :<div>
+
+                    <ul className='dashboard-list'>
+
+                         { Object.keys(users[curUser].answers).length===0?
+                            <p> you haven't answerd any questions</p>
+
+                            :questionsids.filter(id=>Object.keys(users[curUser].answers).includes(id)).map((Qid)=>(
+                                     <li key={Qid}>
+                                         <Question id={Qid}/>
+                                    </li>
+                             ))
+                          }
+                    </ul>
+
+                </div>
+            
+            }
+            
+           
+               
         </div>
         
         
@@ -45,42 +71,10 @@ if(answered===false){
    
    
 }
-else{
-    return(
-        <div className='center'>
-        <button onClick={()=>setAnswered(false)}>
-            not answered { props.questionsids.filter(id=>!Object.keys(props.users[props.curUser].answers).includes(id)).length}
-        </button>
-        <button  onClick={()=>setAnswered(true)}>
-            answerd  {Object.keys(props.users[props.curUser].answers).length}
-        </button>
-        <div>
-               
-                
-               
-            <h3 ></h3>
-            <ul className='dashboard-list'>
-                {
-                 props.questionsids.filter(id=>Object.keys(props.users[props.curUser].answers).includes(id)).map((Qid)=>(
-                        <li key={Qid}>
-                            <Question id={Qid}/>
-                        </li>
-                    ))
-                }
-            </ul>
-
-            </div>      
-        </div>
-        
-        
-    )
-    
-}
 
 
-       
-    
-}
+
+
 
 const mapstatetoprops=({questions,users,curUser})=>{
     return{

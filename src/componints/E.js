@@ -1,17 +1,18 @@
 import React from "react";
-import { connect } from 'react-redux'
-import { NavLink } from 'react-router-dom'
-import { Setcuruser } from "../actions/CurUser";
 
-const E404=(props)=>{
+import { NavLink } from 'react-router-dom'
+
+
+const E404=()=>{
+    
     return(
-        <div>
-            <h1>404</h1>
-           <p> you must  <NavLink onClick={()=>props.dispatch(Setcuruser(null))} to='/' activeClassName='active'>
+        <div className="center" >
+            <h1 className="as">404</h1>
+            <p> you must  <NavLink className="ea" to='/' activeClassName='active'>
             login
-            </NavLink> to go to this page</p>
+            </NavLink> first to go to this page</p>
         </div>
     )
 }
 
-export default connect()(E404);
+export default E404;

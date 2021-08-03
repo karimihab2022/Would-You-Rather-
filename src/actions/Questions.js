@@ -2,8 +2,6 @@ import  {_getQuestions, _getUsers,  _saveQuestion,_saveQuestionAnswer} from "../
 import { showLoading, hideLoading } from 'react-redux-loading'
 
 
-
-
 export const Reseve_questions="Reseve_questions";
 export const Add_question="Add_question";
 export const Ans_question="Ans_question";
@@ -39,6 +37,8 @@ export const HandelAddquestion=(optionOneText,optionTwoText)=>{
         )
     }
 }
+
+
 const Ansquestion=({curUser,qid, answer})=>{
     return{
         type:Ans_question,
@@ -48,7 +48,7 @@ const Ansquestion=({curUser,qid, answer})=>{
     }
 }
 
-export const HandelAnsquestion= ( qid, answer)=>{
+export const HandelAnsquestion= (qid, answer)=>{
     return(dispatch,getState)=>{
         
 
@@ -56,7 +56,7 @@ export const HandelAnsquestion= ( qid, answer)=>{
        
         dispatch(showLoading())
         return  _saveQuestionAnswer({authedUser:curUser,qid, answer})
-        .then((question)=>
+        .then(()=>
             dispatch( Ansquestion({curUser,qid, answer})))
             .then(()=> dispatch(hideLoading())
            

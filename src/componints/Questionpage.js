@@ -1,133 +1,89 @@
 import React,{useState} from "react";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
+
 import { HandelAnsquestion } from "../actions/Questions";
 
 const Questionpage =(props)=>{
     const[selected,setSelected]=useState();
 
-   const onValueChange=(event)=> {
-       
-            setSelected(event.target.value) 
-        
+    const{id,users,questions,curUser,dispatch}=props;
+
+   const onValueChange=(e)=> {
+        setSelected(e.target.value) 
       }
 
-     const formSubmit=(event)=> {
-        event.preventDefault();
-        if(selected===undefined)return
-        console.log(selected)
-        props.dispatch(HandelAnsquestion(props.id,selected))
+     const formSubmit=(e)=> {
+        e.preventDefault();
+        dispatch(HandelAnsquestion(id,selected))
       }
 
+    return(
 
-    
-
-    if(Object.keys(props.users[props.curUser].answers).includes(props.id)){
-
-        if(props.users[props.curUser].answers[props.id]==="optionOne"){
-            return(
-                <div  className='center'> 
-                     <div>
-                <img  src={props.users[props.questions[props.id].author].avatarURL} className="avatar"/>
-                <h1>  asked by {props.users[props.questions[props.id].author].name}</h1>
-                </div>
-                <div>
-                    <h3>the results</h3>
-                <div  >
-                <p> you voted</p>
-                <p > Would You Rather {props.questions[props.id].optionOne.text}?</p>
-                <p> {props.questions[props.id].optionOne.votes.length} out of {props.questions[props.id]
-                .optionOne.votes.length+props.questions[props.id].optionTwo.votes.length} votes</p>
-                <p> {parseInt(props.questions[props.id].optionOne.votes.length)/(props.questions[props.id]
-                .optionOne.votes.length+props.questions[props.id].optionTwo.votes.length)*100}%</p>
-               
-                
-                </div>
-
-                <div  >
-                <p> Would You Rather {props.questions[props.id].optionTwo.text}?</p>
-                <p> {props.questions[props.id].optionTwo.votes.length} out of {props.questions[props.id]
-                .optionOne.votes.length+props.questions[props.id].optionTwo.votes.length} votes</p>
-                 <p> {parseInt(props.questions[props.id].optionTwo.votes.length)/(props.questions[props.id]
-                .optionOne.votes.length+props.questions[props.id].optionTwo.votes.length)*100}%</p>
-                </div>
-
-                </div>
-                
-                
-                </div>
-               
-            )
-        }
-        else{
-            return(
-                <div  className='center'>
-            <div>
-       <img  src={props.users[props.questions[props.id].author].avatarURL} className="avatar"/>
-       <h1> asked by{props.users[props.questions[props.id].author].name}</h1>
-      
-
-      </div>
-      <div>
-          <h1>the results</h1>
-      <div >
-       <p > Would You Rather {props.questions[props.id].optionOne.text}?</p>
-       <p> {props.questions[props.id].optionOne.votes.length} out of {props.questions[props.id]
-       .optionOne.votes.length+props.questions[props.id].optionTwo.votes.length} votes</p>
-        <p> {parseInt(props.questions[props.id].optionOne.votes.length)/(props.questions[props.id]
-                .optionOne.votes.length+props.questions[props.id].optionTwo.votes.length)*100}%</p>
+       <div className="nq">
        
-       </div>
+          {Object.keys(users[curUser].answers).includes(id)?
 
-       <div >
-       <p> you voted</p>
-       <p> Would You Rather {props.questions[props.id].optionTwo.text}?</p>
-       <p> {props.questions[props.id].optionTwo.votes.length} out of {props.questions[props.id]
-       .optionOne.votes.length+props.questions[props.id].optionTwo.votes.length} votes</p>
-        <p> {parseInt(props.questions[props.id].optionTwo.votes.length)/(props.questions[props.id]
-                .optionOne.votes.length+props.questions[props.id].optionTwo.votes.length)*100}%</p>
-       </div>
-      </div>
-     
-       
-       </div>
-            )
-            
-      
-        }
-       
-
-    }
-    else{
-        return(
             <div  className='center'>
-        <div>
-   <img  src={props.users[props.questions[props.id].author].avatarURL} className="avatar"/>
-   <h1>{props.users[props.questions[props.id].author].name} asks</h1>
-   <h3> Would You Rather...</h3>
-   <form onSubmit={formSubmit}>
-   <p >{props.questions[props.id].optionOne.text}<input type="radio" name="a" value="optionOne"  onChange={onValueChange}/></p>
 
-    <p>{props.questions[props.id].optionTwo.text}<input type="radio" name="a" value="optionTwo" onChange={onValueChange}/></p>
-    <button  type="submit">
-          Submit
-        </button>
-   </form>
-   
-  
+                <div className="qheads">
+                    <img  src={users[questions[id].author].avatarURL} className="avatar"/>
+                    <h1> asked by {users[questions[id].author].name}</h1>
+                </div>
 
-   
-   </div>
+                <h2>The Results</h2>
 
-   <div>
+              <div>
+                  
+                  <div  className={ users[curUser].answers[id]==="optionOne"? "done":"ndone"}> 
+               
+                      <p> Would You Rather {questions[id].optionOne.text}?</p>
+                      <p> {questions[id].optionOne.votes.length} out of {questions[id]
+                      .optionOne.votes.length+questions[id].optionTwo.votes.length} votes</p>
+                      <p> {parseInt(questions[id].optionOne.votes.length)/(questions[id]
+                      .optionOne.votes.length+questions[id].optionTwo.votes.length)*100}%</p>
+                      
+                  </div>
+
+
+                  <div className={ users[curUser].answers[id]==="optionTwo"? "done":"ndone"}>
+
+                    <p> Would You Rather {questions[id].optionTwo.text}?</p>
+                    <p> {questions[id].optionTwo.votes.length} out of {questions[id]
+                    .optionOne.votes.length+questions[id].optionTwo.votes.length} votes</p>
+                      <p> {parseInt(questions[id].optionTwo.votes.length)/(questions[id]
+                    .optionOne.votes.length+questions[id].optionTwo.votes.length)*100}%</p>
+                  </div>
+
+              </div>
+              
+
+            </div>
+
+            : <div  className='center'>
+
+                 <div className="qheads">
+                    <img  src={users[questions[id].author].avatarURL} className="avatar"/>
+                    <h1>{users[questions[id].author].name} asks</h1>
+                 </div>   
+
+                  <h3> Would You Rather...</h3>
+
+                  <form onSubmit={formSubmit}>
+                        <p >{questions[id].optionOne.text}<input type="radio"  value="optionOne" name=" " onChange={onValueChange}/></p>
+
+                        <p>{questions[id].optionTwo.text}<input type="radio"  value="optionTwo" name=" "onChange={onValueChange}/></p>
+
+                        <button  type="submit" className="qb" disabled={selected===undefined}>
+                            Submit
+                        </button>
+                  </form>
+                    
+              </div>
+             }
+         </div>
    
-   
-  
-   </div>
-  
-   </div>
-        )
-    }
+    )
+    
     
 }
 
