@@ -41,7 +41,7 @@ const Login=(props)=>{
          }
          if(users[selected].password!==password){
             e.preventDefault()
-             alert("wronge username or password")
+             alert("wrong username or password")
              return
          }
         dispatch(Setcuruser(selected));
