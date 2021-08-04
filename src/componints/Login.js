@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useState} from "react";
 import { connect } from "react-redux";
 import { Setcuruser } from "../actions/CurUser";
-import { Link } from "react-router-dom";
+import { useHistory} from "react-router-dom";
 import {HandelAdduser} from '../actions/Users'
 import ImageInput from './Imageinput';
 import { AvatarGenerator } from 'random-avatar-generator'
@@ -12,6 +12,7 @@ const Login=(props)=>{
 
     const [selected,setSelected]=useState();
     const[password,setpassword]=useState("");
+    const history = useHistory();
 
     const[id,setid]=useState("");
     const[name,setname]=useState("");
@@ -22,32 +23,49 @@ const Login=(props)=>{
     const {users,dispatch}=props;
     const usersids=Object.keys(users);
 
+    
+
     const handelChange=(e)=>{
         e.preventDefault();
         if(e.target.value==="select user") return
         setSelected(e.target.value)
     }
 
-    const handellogin=(e)=>{
+    const handellogin=()=>{
+        
+       
         if(selected===undefined){
-            e.preventDefault()
             alert("please choose a user before login")
             return
          } 
          if(password===''){
-            e.preventDefault()
+            
              alert('please enter the password "the password for the existing users is 123456"')
              return
          }
          if(users[selected].password!==password){
-            e.preventDefault()
+            
              alert("wrong username or password")
              return
          }
+
+        
         dispatch(Setcuruser(selected));
-    
+        if(props.id!==undefined){
+            console.log("bbb")
+            history.push(history.location.pathname)
+            return
+        }
+        history.push("Home")
+        
+       
+        
+        
+      
 
     }
+  
+
 
     const handleChangeid=(e)=>{
         setid(e.target.value);
@@ -90,13 +108,13 @@ const Login=(props)=>{
 
     }
   
-    
 
     return(
         <div>
+           
             <h1 className="center">Welcome to WOULD YOU RATHER?</h1>
              <div className="start">
-            <div className="login">
+                <div className="login">
 
                     <h1 className ="center"> Use old user</h1>
 
@@ -117,10 +135,17 @@ const Login=(props)=>{
                         className='textarea t'       
                     />
 
-                    <Link onClick={handellogin} to='/Home'>login</Link>
+                    <button
+                            
+                            onClick={(e)=>handellogin(e)}>
+                            login
+                            
+                     </button>
+
+                    
                         
 
-                    </div>
+                 </div>
 
 
 
@@ -193,10 +218,11 @@ const Login=(props)=>{
 
 }
 
-function mapStateToProps({users}) {
+function mapStateToProps({users},{id}) {
     
     return {
        users,
+       id
     }
 }
 export default connect(mapStateToProps)(Login);

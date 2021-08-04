@@ -192,7 +192,7 @@ a {
 
 
 }
-.login a{
+.login button{
   margin: auto;
   text-transform: uppercase;
   display:inline-flex;
@@ -201,14 +201,14 @@ a {
   background: white;
   font-size: 15px;
   width: 160px;
-  height: 40px;
+  height: 50px;
   justify-content: center;
   align-items: center;
   margin-top: 10px;
   
 
 }
-.login a:hover{
+.login button:hover{
   background:rgb(6, 118, 209);
   color: white;
 }

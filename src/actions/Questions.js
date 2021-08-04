@@ -1,4 +1,4 @@
-import  {_getQuestions, _getUsers,  _saveQuestion,_saveQuestionAnswer} from "../Data"
+import  {  _saveQuestion,_saveQuestionAnswer} from "../Data"
 import { showLoading, hideLoading } from 'react-redux-loading'
 
 

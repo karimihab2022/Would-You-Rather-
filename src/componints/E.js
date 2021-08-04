@@ -1,16 +1,24 @@
-import React from "react";
-
-import { NavLink } from 'react-router-dom'
+import React, { useState } from "react";
+import Login from "./Login";
 
 
 const E404=()=>{
+    const[tologin,setTologin]=useState(false)
+    const handelclick=()=>{
+        setTologin(true)
+    }
     
+    if(tologin===true){
+        console.log("aaa")
+        return <Login id="add"/>
+    }
     return(
         <div className="center" >
-            <h1 className="as">404</h1>
-            <p> you must  <NavLink className="ea" to='/' activeClassName='active'>
+           
+            <p> you must login first to go to this page</p>
+            <button onClick={handelclick}  className='qb'>
             login
-            </NavLink> first to go to this page</p>
+            </button>
         </div>
     )
 }

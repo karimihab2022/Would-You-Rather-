@@ -17,6 +17,15 @@ const Questionpage =(props)=>{
         dispatch(HandelAnsquestion(id,selected))
       }
 
+      if(questions[id]===undefined){
+        return(
+          <div className="center">
+            <h1 className=" as">404</h1>
+            <h1 >this question does not exist</h1>
+           </div>
+        
+        )
+    }
     return(
 
        <div className="nq">
@@ -26,7 +35,7 @@ const Questionpage =(props)=>{
             <div  className='center'>
 
                 <div className="qheads">
-                    <img  src={users[questions[id].author].avatarURL} className="avatar"/>
+                    <img  src={users[questions[id].author].avatarURL} alt="img" className="avatar"/>
                     <h1> asked by {users[questions[id].author].name}</h1>
                 </div>
 
@@ -62,7 +71,7 @@ const Questionpage =(props)=>{
             : <div  className='center'>
 
                  <div className="qheads">
-                    <img  src={users[questions[id].author].avatarURL} className="avatar"/>
+                    <img  src={users[questions[id].author].avatarURL} alt="img" className="avatar"/>
                     <h1>{users[questions[id].author].name} asks</h1>
                  </div>   
 

@@ -32,7 +32,7 @@ function App(props) {
        
        {loading===true
       ?<div>
-        <Route path='/' exact component={ Login} />
+         <Route path='/' exact  component={ Login}/> 
         <Route path='/Home'  component={ E} />
         <Route path='/add'  component={ E} />
         <Route path='/leaderboard' component={ E} />
@@ -45,7 +45,7 @@ function App(props) {
            <Info/>
            <h1 className="center">WOULD YOU RATHER ... ?</h1>
          <div>  
-          <Route path='/' exact component={ Login} />
+        
           <Route path='/Home'   component={QList} />
           <Route path='/question/:id' component={Questionpage} />
           <Route path='/add' component={NewQuestion} />

@@ -9,7 +9,7 @@ const User=(props)=>{
         <div className="user">
 
             <div className="userinfo">
-                <img src={users[id].avatarURL} className="avatar"/>
+                <img src={users[id].avatarURL} alt="img" className="avatar"/>
             </div>
 
            <div className="userd">

@@ -17,7 +17,7 @@ const Info =(props)=>{
 
             <p>welcome {users[curUser].name}</p>
 
-            <img className="avatar" src={users[curUser].avatarURL}/>
+            <img className="avatar" src={users[curUser].avatarURL} alt="img"/>
              <NavLink onClick={()=>dispatch(Setcuruser(null))} to='/' activeClassName='active'>
             logout
             </NavLink>

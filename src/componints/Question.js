@@ -7,12 +7,14 @@ const Question=(props)=>{
 
     const{question,users}=props;
 
+   
+
     return(
 
         <div className='tweet' >
 
             <div className="qhead">
-                <img  src={users[question.author].avatarURL} className="avatar"/>
+                <img  src={users[question.author].avatarURL} alt="img" className="avatar"/>
                 <h3>{users[question.author].name} asks </h3>
             </div>
            
